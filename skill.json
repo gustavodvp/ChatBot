@@ -1,0 +1,400 @@
+{
+  "name": "pizzariaBotsBr",
+  "intents": [
+    {
+      "intent": "pedir_pizza",
+      "examples": [
+        {
+          "text": "to querendo uma pizza"
+        },
+        {
+          "text": "gostaria de pedir uma pizza"
+        },
+        {
+          "text": "quero fazer meu pedido"
+        },
+        {
+          "text": "vou fazer um pedido"
+        },
+        {
+          "text": "me vê uma pizza"
+        }
+      ],
+      "description": "quero pedir uma pizza"
+    },
+    {
+      "intent": "saudacao",
+      "examples": [
+        {
+          "text": "Bom dia"
+        },
+        {
+          "text": "Boa noite"
+        },
+        {
+          "text": "Boa tarde"
+        },
+        {
+          "text": "Olá"
+        }
+      ],
+      "description": "Boa noite"
+    },
+    {
+      "intent": "sabor",
+      "examples": [
+        {
+          "text": "calabresa"
+        },
+        {
+          "text": "mussarela"
+        },
+        {
+          "text": "queijo"
+        },
+        {
+          "text": "peperoni"
+        },
+        {
+          "text": "pepperoni"
+        },
+        {
+          "text": "portuguesa"
+        },
+        {
+          "text": "moda"
+        },
+        {
+          "text": "a moda"
+        },
+        {
+          "text": "bacon"
+        },
+        {
+          "text": "4 queijos"
+        },
+        {
+          "text": "frango"
+        },
+        {
+          "text": "frango com catupiry"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "data_entrega",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Hoje a noite",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Amanha",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Hoje",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-date",
+      "values": []
+    },
+    {
+      "entity": "sys-number",
+      "values": []
+    },
+    {
+      "entity": "endereco_entrega",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "CEP",
+          "synonyms": [
+            "cep"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-time",
+      "values": []
+    },
+    {
+      "entity": "tipo_massa",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Massa Grossa",
+          "synonyms": [
+            "massa grossa"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Massa fina",
+          "synonyms": [
+            "massa fina"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "numero_casa_apto",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Numero",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sabor",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Calabresa",
+          "synonyms": [
+            "calabreza"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Mussarela",
+          "synonyms": [
+            "Mussarella",
+            "Mozzarela",
+            "queijo"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Peperonni",
+          "synonyms": [
+            "pepperoni"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Portuguesa",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "language": "pt-br",
+  "metadata": {
+    "api_version": {
+      "major_version": "v1",
+      "minor_version": "2018-09-20"
+    }
+  },
+  "description": "",
+  "dialog_nodes": [
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_8_1540318230308",
+      "event_name": "focus",
+      "dialog_node": "handler_10_1540318230308",
+      "previous_sibling": "handler_9_1540318230308"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_8_1540318230308",
+      "event_name": "input",
+      "dialog_node": "handler_9_1540318230308"
+    },
+    {
+      "type": "slot",
+      "parent": "node_5_1540317925857",
+      "dialog_node": "slot_8_1540318230308"
+    },
+    {
+      "type": "standard",
+      "output": {},
+      "metadata": {},
+      "dialog_node": "node_7_1540318008609",
+      "previous_sibling": "node_6_1540317969138"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual tipo de massa? Fina ou grossa?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "#sabor",
+      "dialog_node": "node_3_1540317623964",
+      "previous_sibling": "node_1_1540317513455"
+    },
+    {
+      "type": "frame",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Em qual endereço? Digite o seu CEP."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "@data_entrega",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_5_1540317925857",
+      "digress_out": "allow_all",
+      "previous_sibling": "node_4_1540317892904",
+      "digress_out_slots": "not_allowed"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Pra quando será a entrega?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "@tipo_massa",
+      "dialog_node": "node_4_1540317892904",
+      "previous_sibling": "node_3_1540317623964"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual sabor?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "#pedir_pizza",
+      "dialog_node": "node_1_1540317513455",
+      "previous_sibling": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "Em outros casos",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Eu não entendi. Você pode tentar reformular a frase."
+              },
+              {
+                "text": "Você pode reformular sua afirmação? Eu não estou entendendo."
+              },
+              {
+                "text": "Eu não entendi o sentido."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "dialog_node": "Em outros casos",
+      "previous_sibling": "node_7_1540318008609"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Agora, digite o numero da casa ou apartamento."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "@endereco_entrega",
+      "dialog_node": "node_6_1540317969138",
+      "previous_sibling": "node_5_1540317925857"
+    },
+    {
+      "type": "standard",
+      "title": "Bem-vindo",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá. Seja Bem-Vindo. Qual seu pedido?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "welcome",
+      "dialog_node": "Bem-vindo"
+    }
+  ],
+  "workspace_id": "2bb83ef0-ceb8-4b95-a8eb-fb85f27c8b40",
+  "counterexamples": [],
+  "system_settings": {
+    "tooling": {
+      "store_generic_responses": true
+    },
+    "disambiguation": {
+      "prompt": "Você quis dizer:",
+      "none_of_the_above_prompt": "Nenhuma das anteriores"
+    },
+    "human_agent_assist": {
+      "prompt": "Você quis dizer:"
+    }
+  },
+  "learning_opt_out": false,
+  "status": "Available"
+}
